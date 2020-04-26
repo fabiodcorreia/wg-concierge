@@ -28,10 +28,12 @@ WG-Concierge allow to add new devices quickly with need to connect to the server
 3. Keep track of all devices registered
 
 ## Endpoints
-- GET  Auth /map
-- GET  Auth /invite/<email>
-- GET       /register/<token>
-- POST      /register/<token> | Body device_name
+|  Method | Auth |   Path    | Params | Body        |
+|---------|------|-----------|--------|-------------|
+|   GET   | Yes  | /map      |        |             |
+|   GET   | Yes  | /invate   | email  |             |
+|   GET   | No   | /register | token  |             |
+|   POST  | No   | /register | token  | device_name |
 
 ## Out of Scope
 
