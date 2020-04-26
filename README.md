@@ -31,7 +31,7 @@ WG-Concierge allow to add new devices quickly with need to connect to the server
 - GET  Auth /map
 - GET  Auth /invite/<email>
 - GET       /register/<token>
-- POST      /register/<token> | Body => device_name
+- POST      /register/<token> | Body device_name
 
 ## Out of Scope
 
