@@ -1,5 +1,5 @@
 # WG-Concierge
-WG-Concierge allow to add new devices quickly with need to connect to the server remotly, it's mostly and ingress tool for WireGuard networks
+WG-Concierge allow to add new devices quickly with no need to connect to the server remotly, it's mostly and ingress tool for WireGuard networks
 
 ## Conditions
 - WG-Concierge needs to be installed on the server with root access (this should change but for now needs the same access as wg)
@@ -39,3 +39,29 @@ WG-Concierge allow to add new devices quickly with need to connect to the server
 
 1. Remove or Update peers (that needs to be done directly on the server)
 2. Manage the wg server operations like start/stop...
+
+## Development
+
+Since this app needs to run on the same server of WireGuard a Vagrant Box is provided. This box start with WireGuard already installed and with a standard configuration.
+
+The folder build will be syncronized with the box, so every time the project is compiled the result will be available inside the box.
+
+### Start the Box
+```
+vagrant up
+```
+
+### Connet to the Box
+```
+vagrant ssh
+```
+
+### Shutdown the box
+```
+vagrant halt
+```
+
+### Destroy the box
+```
+vagrant destroy
+```
