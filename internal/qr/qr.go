@@ -2,10 +2,12 @@ package qr
 
 import (
 	"fmt"
+	"image/png"
 	"io"
 	"io/ioutil"
 
-	"github.com/yeqown/go-qrcode"
+	"github.com/boombuler/barcode"
+	"github.com/boombuler/barcode/qr"
 )
 
 // Encode converts the content of io.Reader into QR Code and writes it to the io.Writer
@@ -17,14 +19,12 @@ func Encode(r io.Reader, w io.Writer) error {
 	return EncodeString(string(data), w)
 }
 
-// EncodeString converts the string content into QR Code and writes it to the io.Writer
+// EncodeString converts the string content into QR Code and writes it to the io.Writer as PNG
 func EncodeString(content string, w io.Writer) error {
-	qrc, err := qrcode.New(content)
+	qrc, err := qr.Encode(content, qr.M, qr.Auto)
+	qrc, err = barcode.Scale(qrc, 250, 250)
 	if err != nil {
 		return fmt.Errorf("could not generate QRCode: %w", err)
 	}
-	if err := qrc.SaveTo(w); err != nil {
-		return fmt.Errorf("could not save image: %w", err)
-	}
-	return nil
+	return png.Encode(w, qrc)
 }

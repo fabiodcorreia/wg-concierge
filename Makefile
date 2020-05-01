@@ -10,8 +10,12 @@ else
 endif
 
 format:
-	gofmt -s -w *.go
 	go mod tidy
+	go vet
+	gofmt -s -w *.go
+
+run: format
+	go run main.go
 
 build: format build-linux-arm build-linux-arm64 build-linux-386 build-linux-amd64
 	vagrant rsync
