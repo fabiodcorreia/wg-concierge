@@ -10,6 +10,7 @@ Vagrant.configure("2") do |config|
   config.vm.box = "debian/buster64"
   config.vm.hostname = "#{BOX_NAME}"
   config.vm.synced_folder "./build", "/home/vagrant/wg-concierge", type: "rsync", rsync__verbose: "true"
+  config.vm.network "public_network", ip: "192.168.5.81"
 
   config.vm.provider "virtualbox" do |vb|
     vb.name = "#{BOX_NAME}"
@@ -25,7 +26,7 @@ Vagrant.configure("2") do |config|
     apt-get upgrade -y
     apt-get install wireguard -y
 
-    echo "[Interface]\nAddress = 10.1.1.1/24\nSaveConfig = true\nListenPort = 55555\nPrivateKey = qJvFeHHuffBaPWx4veJGQqXw6j5zdo5cSOaBd1Z0Km4=" | tee /etc/wireguard/wg0.conf
+    echo "[Interface]\nAddress = 10.1.1.1/24\nSaveConfig = true\nListenPort = 55555\nPrivateKey = aF91mBsRtT1OuPccQUeoCDVgAmfNnCcAEknVqbxXIHw=" | tee /etc/wireguard/wg0.conf
 
     sysctl -w net.ipv4.ip_forward=1
     systemctl enable wg-quick@wg0
