@@ -1,5 +1,5 @@
 # WG-Concierge
-WG-Concierge allow to add new devices quickly with no need to connect to the server remotly, it's mostly and ingress tool for WireGuard networks
+WG-Concierge allow to add new devices quickly with no need to connect to the server remotely, it's mostly and ingress tool for WireGuard networks
 
 ## Conditions
 - WG-Concierge needs to be installed on the server with root access (this should change but for now needs the same access as wg)
@@ -15,7 +15,7 @@ WG-Concierge allow to add new devices quickly with no need to connect to the ser
 6. Repeat step 4 for the new request
 7. The server checks if the machine name already exists for that email, if so reply error
 8. The server generates the private and public keys for the client (in memory)
-9. The server grabs the last IP added, increment and lock it to that emails-devicce
+9. The server grabs the last IP added, increment and lock it to that emails-device
 10. The server generate the client configuration file (in memory)
 11. The server update wg config with the new client
 12. The server reply with QR Code and Configuration file
@@ -31,7 +31,7 @@ WG-Concierge allow to add new devices quickly with no need to connect to the ser
 |  Method | Auth |   Path    | Params | Body        |
 |---------|------|-----------|--------|-------------|
 |   GET   | Yes  | /map      |        |             |
-|   GET   | Yes  | /invate   | email  |             |
+|   GET   | Yes  | /invite   | email  |             |
 |   GET   | No   | /register | token  |             |
 |   POST  | No   | /register | token  | device_name |
 
@@ -44,14 +44,14 @@ WG-Concierge allow to add new devices quickly with no need to connect to the ser
 
 Since this app needs to run on the same server of WireGuard a Vagrant Box is provided. This box start with WireGuard already installed and with a standard configuration.
 
-The folder build will be syncronized with the box, so every time the project is compiled the result will be available inside the box.
+The folder build will be synchronized with the box, so every time the project is compiled the result will be available inside the box.
 
 ### Start the Box
 ```
 vagrant up
 ```
 
-### Connet to the Box
+### Connect to the Box
 ```
 vagrant ssh
 ```
