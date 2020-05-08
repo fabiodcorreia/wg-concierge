@@ -17,7 +17,7 @@ format:
 	gofmt -s -w cmd/**/*.go 
 
 run: format
-	go run $(CMD_MAIN)
+	go run $(CMD_MAIN)  $(filter-out $@,$(MAKECMDGOALS))
 
 build: format build-linux-arm build-linux-arm64 build-linux-386 build-linux-amd64
 	vagrant rsync

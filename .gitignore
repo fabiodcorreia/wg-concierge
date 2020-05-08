@@ -107,3 +107,4 @@ $RECYCLE.BIN/
 
 .vagrant
 build/wg-concierge*
+sandbox.go

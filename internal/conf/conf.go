@@ -26,6 +26,7 @@ type Logging struct {
 type SMTP struct {
 	Server   string `conf:"default:smtp.sendgrid.net"`
 	Port     int    `conf:"default:465"`
+	From     string `conf:"defautl:WG Concierge<no-reply@wg-concierge.com>"`
 	Username string `conf:"required"`
 	Password string `conf:"required,noprint"`
 }

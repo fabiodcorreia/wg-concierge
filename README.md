@@ -31,7 +31,8 @@ WG-Concierge allow to add new devices quickly with no need to connect to the ser
 |  Method | Auth |   Path    | Params | Body        |
 |---------|------|-----------|--------|-------------|
 |   GET   | Yes  | /map      |        |             |
-|   GET   | Yes  | /invite   | email  |             |
+|   GET   | Yes  | /invite   |        |             |
+|   POST  | Yes  | /invite   |        | email       |
 |   GET   | No   | /register | token  |             |
 |   POST  | No   | /register | token  | device_name |
 

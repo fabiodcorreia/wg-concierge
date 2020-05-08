@@ -25,6 +25,7 @@ func NewService(logger *log.Logger) *Service {
 	s.Mux.Use(middleware.RequestLogger(&middleware.DefaultLogFormatter{Logger: logger, NoColor: false}))
 	s.Mux.Use(middleware.Recoverer)
 	s.Mux.Use(middleware.RealIP)
+	s.Mux.Use(middleware.RedirectSlashes)
 
 	return &s
 }
