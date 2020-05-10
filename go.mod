@@ -6,6 +6,7 @@ require (
 	github.com/ardanlabs/conf v1.2.2
 	github.com/boombuler/barcode v1.0.0
 	github.com/go-chi/chi v4.1.1+incompatible
-	github.com/jordan-wright/email v0.0.0-20200322182553-8eef2508c362
+	github.com/google/uuid v1.1.1
+	github.com/xhit/go-simple-mail v2.2.2+incompatible
 	golang.org/x/net v0.0.0-20200506145744-7e3656a0809f // indirect
 )

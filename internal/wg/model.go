@@ -17,8 +17,8 @@ type ClientPeer struct {
 
 // ClientConfig is the WireGuard Client Configuration specification
 type ClientConfig struct {
-	Interface ClientInterface
-	Peer      ClientPeer
+	Interface ClientInterface // Client Interface specification
+	Peer      ClientPeer      // Client Peer specificiation
 }
 
 // ServerInterface is the WireGuard Server Interface specification
@@ -32,10 +32,8 @@ type ServerInterface struct {
 
 // ServerPeer is the WireGuard Server Peer specification
 type ServerPeer struct {
-	PublicKey    string
-	PreSharedKey string
-	Endpoint     string
-	AllowedIPs   string
+	PublicKey  string
+	AllowedIPs string
 }
 
 // ServerConfig is the WireGuard Server Configuration specification

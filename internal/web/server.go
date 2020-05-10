@@ -24,12 +24,12 @@ type HTTPServer struct {
 func NewHTTPServer(cfg conf.App, logger *log.Logger, handler http.Handler) *HTTPServer {
 	appServer := HTTPServer{
 		server: http.Server{
-			Addr:              cfg.Web.Host,         // IP:Port or Hostname:Port
-			Handler:           handler,              // Root HTTP Router
-			ReadTimeout:       cfg.Web.ReadTimeout,  // the maximum duration for reading the entire request, including the body
-			WriteTimeout:      cfg.Web.WriteTimeout, // the maximum duration before timing out writes of the response
-			IdleTimeout:       30 * time.Second,     // the maximum amount of time to wait for the next request when keep-alive is enabled
-			ReadHeaderTimeout: 2 * time.Second,      // the amount of time allowed to read request headers
+			Addr:              cfg.Web.Host,              // IP:Port or Hostname:Port
+			Handler:           handler,                   // Root HTTP Router
+			ReadTimeout:       cfg.Web.ReadTimeout,       // the maximum duration for reading the entire request, including the body
+			WriteTimeout:      cfg.Web.WriteTimeout,      // the maximum duration before timing out writes of the response
+			IdleTimeout:       cfg.Web.IdleTimeout,       // the maximum amount of time to wait for the next request when keep-alive is enabled
+			ReadHeaderTimeout: cfg.Web.ReadHeaderTimeout, // the amount of time allowed to read request headers
 		},
 		logger: logger,
 	}

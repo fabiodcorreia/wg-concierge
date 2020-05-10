@@ -2,7 +2,6 @@ package web
 
 import (
 	"log"
-	"time"
 
 	"github.com/go-chi/chi"
 	"github.com/go-chi/chi/middleware"
@@ -25,11 +24,7 @@ func NewService(logger *log.Logger) *Service {
 	s.Mux.Use(middleware.RequestLogger(&middleware.DefaultLogFormatter{Logger: logger, NoColor: false}))
 	s.Mux.Use(middleware.Recoverer)
 	s.Mux.Use(middleware.RealIP)
-	s.Mux.Use(middleware.RedirectSlashes)
+	s.Mux.Use(middleware.StripSlashes)
 
 	return &s
-}
-
-func (s *Service) AddTimeout(timeout time.Duration) {
-	s.Mux.Use(middleware.Timeout(timeout))
 }
