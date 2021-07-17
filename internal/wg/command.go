@@ -43,12 +43,14 @@ func SyncPeerConf(inter string, fileName string) error {
 }
 
 func executeWGWithInput(args []string, input string) (output string, err error) {
+	/* #nosec */
 	cmd := exec.Command(commandWG, args...)
 	cmd.Stdin = bytes.NewBuffer([]byte(input))
 	return executeWG(cmd)
 }
 
 func executeWGNoInput(args []string) (output string, err error) {
+	/* #nosec */
 	cmd := exec.Command(commandWG, args...)
 	return executeWG(cmd)
 }

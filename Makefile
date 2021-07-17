@@ -14,12 +14,12 @@ endif
 format:
 	go mod tidy
 	go vet ./...
-	gofmt -s -w cmd/**/*.go 
+	gofmt -s -w cmd/**/*.go
 
 run: format
 	go run $(CMD_MAIN)  $(filter-out $@,$(MAKECMDGOALS))
 
-build: format build-linux-arm build-linux-arm64 build-linux-386 build-linux-amd64
+build: format security build-linux-arm build-linux-arm64 build-linux-386 build-linux-amd64
 	vagrant rsync
 
 build-linux-arm:
@@ -45,7 +45,7 @@ security:
 
 clean:
 	go clean
-	rm -f build/wg-concierge*
+	rm -f build/wg-concierge* build/sandbox*
 
 
 .PHONY: format build clean build_linux_arm build-linux-arm64 build-linux-386 build-linux-amd64 build-darwin-amd64 build-dev security

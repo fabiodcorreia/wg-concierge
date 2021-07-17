@@ -28,17 +28,28 @@ type Logging struct {
 type SMTP struct {
 	Server   string `conf:"default:smtp.sendgrid.net"`
 	Port     int    `conf:"default:587"`
-	From     string `conf:"default:WG Concierge<no-reply@wg-concierge.com>"`
+	From     string `conf:"default:WG Concierge<no-reply@wg-concierge>"`
 	Username string `conf:"required"`
 	Password string `conf:"required,noprint" json:"-"`
 }
 
+type WireGuard struct {
+	ConfigPath     string `conf:"default:/etc/wireguard/wg0.conf"`
+	DNS            string `conf:"default:1.1.1.1"`
+	PublicEndpoint string `conf:"required"`
+}
+
 // App holds the application configuration
 type App struct {
-	Web    WebServer
-	Log    Logging
-	Email  SMTP
-	Domain string `conf:"default:http://localhost:8080"`
+	conf.Version
+	Web       WebServer
+	Email     SMTP
+	AdminUser string `conf:"default:admin"`
+	AdminPass string `conf:"default:admin,noprint" json:"-"`
+	Domain    string `conf:"default:http://localhost:8080"`
+	Database  string `conf:"default:$HOME/.wg-concierge"`
+	WireGuard WireGuard
+	Log       Logging
 }
 
 // Load will load the configuration into the App Configuration
@@ -52,12 +63,21 @@ func Load(args []string, namespace string, appConfig *App) error {
 			fmt.Println(usage)
 			os.Exit(0)
 		}
+		if err == conf.ErrVersionWanted {
+			version, err := conf.VersionString(namespace, appConfig)
+			if err != nil {
+				return fmt.Errorf("generating version: %w", err)
+			}
+			fmt.Println(version)
+			os.Exit(0)
+		}
 		return fmt.Errorf("parsing config: %w", err)
 	}
 	return nil
 }
 
-func PrettyString(app *App) string {
+// PrettyString generates a JSON well formated string representation of the configuraiton
+func (app *App) PrettyString() string {
 	b, err := json.MarshalIndent(app, "", "  ")
 	if err != nil {
 		fmt.Println("error:", err)

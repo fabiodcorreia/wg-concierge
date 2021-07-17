@@ -11,6 +11,12 @@ import (
 	"github.com/fabiodcorreia/wg-concierge/internal/wg"
 )
 
+//
+//
+//
+//
+// Marshal and Unmarshal the Client Configuration File (Imported on the client peer)
+
 const clientConfig = `
 [Interface]
 Address = {{ .Interface.Address }}
@@ -23,6 +29,8 @@ Endpoint = {{ .Peer.Endpoint }}
 AllowedIPs = {{ .Peer.AllowedIPs }}
 PersistentKeepalive = {{ .Peer.KeepAlive }}
 `
+
+//! Talvez so precise de serializar os Client Confs (Browser e File) e deserializar os Server Confs para ir buscar a Priv e gerar a Pub Keys e ir buscar os IPs
 
 // MarshalClient will convert a ClientConfig Value in text and serialize it on the io.Writer
 func MarshalClient(cc wg.ClientConfig, w io.Writer) error {
@@ -109,13 +117,4 @@ func UnmarshalClientFromStr(c string, cc *wg.ClientConfig) error {
 	cc.Peer.AllowedIPs = val
 
 	return nil
-}
-
-// findConfig find the regex group and if required and not found return an error, otherwise return the string found
-func findConfig(source *string, regex *regexp.Regexp, isRequired bool) (value string, err error) {
-	match := regex.FindStringSubmatch(*source)
-	if match == nil && isRequired {
-		return value, fmt.Errorf("configuration not found")
-	}
-	return match[1], nil
 }
